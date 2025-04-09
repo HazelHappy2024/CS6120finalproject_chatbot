@@ -1,124 +1,133 @@
-/* Overall container with 2 columns */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .app-container {
   display: flex;
   height: 100vh;
   margin: 0;
-  background-color: #fbf7fb; /* lighter purple */
-  font-family: 'Segoe UI', sans-serif;
+  background-color: #faf0fa; /* lighter purple */
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-/* Left sidebar, bigger top margin */
+/* Left sidebar */
 .sidebar {
-  flex: 1; /* 1 unit */
-  min-width: 320px; /* you can adjust to taste */
-  background-color: #ffffff;
+  flex: 1; /* Let the sidebar be ~1 unit wide */
+  min-width: 220px; /* if you want a min width, can keep or remove */
+  background-color: #d5deef; /* Lighter purple background? */
   display: flex;
   flex-direction: column;
-  padding: 300px 20px 20px 20px; /* add top margin: 30px, left/right 20px */
+  padding: 400px 20px 20px 20px; /* smaller top padding so it doesn't become huge on smaller screens */
   border-right: 1px solid #ccc;
-  background-color: #d5deef; /* lighter purple */
 }
 
+/* Header: Logo + Title in a row */
 .sidebar-header {
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: center;
 }
 
-/* A purple "frame" container for the logo */
+/* The purple logo frame - we can scale with clamp or keep a fixed size */
 .sidebar-logo-frame {
-  display: inline-flex;               /* so it only fits content & center the image */
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 60px;                        /* overall diameter of the circle */
-  height: 60px;
-  border-radius: 50%;                 /* make it circular */
-  background-color: #a077c2;          /* your purple brand color */
-  margin-right: 8px;                 /* optional spacing from the title */
+  /* 
+     Using clamp ensures it won't be smaller than 40px or bigger than 60px,
+     but can scale in between if the sidebar shrinks or grows 
+  */
+  width: clamp(40px, 10vw, 60px);
+  height: clamp(40px, 10vw, 60px);
+
+  border-radius: 50%;
+  background-color: #a077c2;  /* purple brand color */
+  margin-right: 8px;
 }
 
-
-/* The logo image inside the purple frame */
+/* Logo inside the frame. We'll also clamp, but smaller. */
 .sidebar-logo {
-  width: 45px;                        /* smaller than the frame => some purple around it */
-  height: 45px;
-  border-radius: 50%;                 /* circle as well, in case the image is not square */
-  object-fit: cover;                  /* ensures the image is cropped properly if not square */
+  width: 70%; 
+  height: 70%;    /* 70% of the frame, leaving 30% for the purple ring */
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-
+/* Title next to the logo frame */
 .sidebar-title {
   margin: 0;
-  font-size: 2.0rem;
+  font-size: 22px;
 }
 
-/* Additional sidebar items spaced out */
+/* Body: items stacked with a gap */
 .sidebar-body {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 20px; /* space after the header */
 }
 
-.api-indicator {
-  color: #2c4f27;
-  line-height: 1.2; 
-  padding: 12px 12px;
-  display: inline-flex;           /* Side-by-side icon + text */
-  align-items: center;            /* Vertically center them */
-  background-color: #a5beef;      /* Light pastel green background */
-  padding: 8px 14px;             /* Room around icon/text */
-  border-radius: 8px;            /* Slightly rounded corners */
-  font-size: 1.5rem;             /* Match your other text sizes */
-  font-weight: 500;              /* Make the text a bit bolder */
-  gap: 10px;                     /* Space between the check and text */
-  margin-top: 18px;
-  width: 360px; /* Shrink to fit content */  
-  margin-bottom: 5px;           /* If you want some space below it */
-}
-.api-indicator-icon {
-  font-size: 1.8rem;             /* Icon size */
-  color: #2c4f27;                /* Match the text color */
-}
-
+/* 1) API indicator, 2) link, 3) button: all share a similar style so they line up and scale horizontally */
+.api-indicator,
+.blog-link,
 .clear-btn {
-  font-weight: 500;              /* Make the text a bit bolder */ 
-  padding: 12px 12px;
+  display: inline-flex;       /* so we can see text + icon side by side if needed */
+  align-items: center;
+  justify-content: center;
   background-color: #a5beef;
-  cursor: pointer;
-  border-radius: 8px;
-  font-size: 1.5rem;
-  line-height: 1.2; 
-  text-align: center;  
-  width: 385px;; /* Shrink to fit content */  
-  border: none;  
-  color: #2c4f27;  
-  text-align: left;
-
-}
-.clear-btn:hover {
-  background-color: #a5beef;
-}
-
-/* 2) Link styled like a button (second line) */
-.blog-link {
-  display: inline-block;       /* so we can add padding, background, etc. */
-  text-decoration: none;       /* remove underlines */
   color: #2c4f27;
-  background-color: #a5beef;   /* same color */
   padding: 8px 14px;
   border-radius: 8px;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.2;
-  width: fit-content;
-  margin-bottom: 5px;
-  width: 360px; 
+  /* Let them scale to fill up the available width without overflowing. */
+  width: 100%;
+  box-sizing: border-box;
+  text-decoration: none; /* for blog-link so there's no underline */
 }
 
-/* optional hover effect for link */
-.blog-link:hover {
-  background-color: #98b3e2;   /* a slight variation */
+/* Distinguish them as needed */
+/* API-indicator might have an icon inside that is different. */
+.api-indicator {
+  gap: 10px;
+}
+
+/* If you have an icon in the .api-indicator */
+.api-indicator-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: #2c4f27; /* dark greenish/blueish */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* The link (2nd line) is just the same shape, no underline. */
+.blog-link {
+  text-align: center; /* or left, whichever you prefer */
+}
+
+/* The button (3rd line) has a pointer on hover, etc. */
+.clear-btn {
+  border: none;
+  cursor: pointer;
+  text-align: center; /* or left if you want left-aligned text */
+}
+
+/* A simple hover effect for link & button if you want. */
+.blog-link:hover,
+.clear-btn:hover {
+  background-color: #93abd8; /* slightly darker variant */
 }
 
 /* Right chat panel */
@@ -129,37 +138,36 @@
   padding: 0 20px 20px;
 }
 
-/* The scrollable message area */
+/* Scrollable messages area */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
   margin-top: 20px;
 }
 
-/* Each conversation block */
+/* conversation block with slight gap */
 .chat-block {
   margin-bottom: 16px;
 }
 
-/* Question bubble */
+/* question bubble */
 .question-bubble {
-  background-color: #95a1e6b3;
-  color: #161313;
+  background-color: #eadebf;
+  color: #333;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 8px;
   max-width: 80%;
-  font-size: 1.3rem;
 }
 
-/* Answer group */
+/* answer group bubble */
 .answers-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Answer bubble styling */
+/* answer bubble styling */
 .answer-bubble {
   display: flex;
   align-items: flex-start;
@@ -167,8 +175,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   max-width: 80%;
-  background-color: #d7d0ea;
-  font-size: 1.3rem;
+  background-color: #fff;
 }
 
 .chatGpt-bubble {
@@ -181,24 +188,18 @@
 
 .icon {
   margin-right: 10px;
-  font-size: 1.2rem;
+  font-size: 16px;
 }
 
-/* Style selection buttons */
+/* style selection buttons inside chat */
 .choose-buttons button {
   margin-right: 10px;
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1.2rem;
-  background-color: #a5beef;
-  color: white; 
-  border: none;
 }
 
-/* Final answer block */
 .final-answer {
-  font-size: 1.2rem;
   margin-top: 8px;
   padding: 10px;
   background-color: #fafafa;
@@ -207,13 +208,12 @@
   margin-bottom: 10px;
 }
 
-/* Chat input area */
+/* chat input area at bottom */
 .chat-input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   padding: 20px;
-  /* Input area stays at bottom within its column */
 }
 
 .chat-input {
@@ -223,7 +223,7 @@
   resize: none;
   overflow: hidden;
   padding: 12px 60px 12px 16px;
-  font-size: 1.5rem;
+  font-size: 18px;
   border: 1px solid #ccc;
   border-radius: 25px;
   outline: none;
@@ -233,7 +233,7 @@
 
 .send-icon-btn {
   position: absolute;
-  right: 16px;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
   border: none;
@@ -243,7 +243,6 @@
 }
 
 .send-icon {
-  font-size: 30px;
+  font-size: 20px;
   color: #7c44ab;
-  margin-right: 10px;
 }
