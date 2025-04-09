@@ -21,7 +21,7 @@ body, html {
   background-color: #d5deef; /* Lighter purple background? */
   display: flex;
   flex-direction: column;
-  padding: 400px 20px 20px 20px; /* smaller top padding so it doesn't become huge on smaller screens */
+  padding: 300px 20px 20px 20px; /* smaller top padding so it doesn't become huge on smaller screens */
   border-right: 1px solid #ccc;
 }
 
