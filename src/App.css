@@ -10,7 +10,7 @@ body, html {
   display: flex;
   height: 100vh;
   margin: 0;
-  background-color: #faf0fa; /* lighter purple */
+  background-color: #fafafa; /* offwhite */
   font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
@@ -18,7 +18,7 @@ body, html {
 .sidebar {
   flex: 1; /* Let the sidebar be ~1 unit wide */
   min-width: 220px; /* if you want a min width, can keep or remove */
-  background-color: #d5deef; /* Lighter purple background? */
+  background-color: #f5f5f5; /* Lighter purple background? */
   display: flex;
   flex-direction: column;
   padding: 300px 20px 20px 20px; /* smaller top padding so it doesn't become huge on smaller screens */
@@ -152,12 +152,13 @@ body, html {
 
 /* question bubble */
 .question-bubble {
-  background-color: #eadebf;
+  background-color: #f5f5f5; /* light purple */
   color: #333;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 8px;
   max-width: 80%;
+  border: 1px solid #ddd;
 }
 
 /* answer group bubble */
@@ -197,6 +198,8 @@ body, html {
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
+  border: 0.5px solid #ddd;
+  background-color:  #f5f5f5;
 }
 
 .final-answer {
@@ -225,11 +228,17 @@ body, html {
   padding: 12px 60px 12px 16px;
   font-size: 18px;
   border: 1px solid #ccc;
-  border-radius: 25px;
+  border-radius: 10px;
   outline: none;
   box-sizing: border-box;
   background-color: #fff;
 }
+
+.chat-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(124, 68, 171, 0.2); /* a slight purple glow */
+}
+
 
 .send-icon-btn {
   position: absolute;
